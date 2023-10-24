@@ -1,0 +1,64 @@
+﻿@model List<NewsContent>
+@{
+    NewsContent lastNewsContent = Model.FirstOrDefault();
+    bool flag = true;
+}
+@inject LanguageService language
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="news_navibox">
+            <p>
+                <a asp-controller="Home" asp-action="Index">@language.Getkey("Home")</a>
+            </p>
+            <p>|</p>
+            <p>
+                <a>@language.Getkey("UsefulInfos")</a>
+            </p>
+            <p>|</p>
+            <p>@language.Getkey("News")</p>
+        </div>
+    </div>
+</section>
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="news_firstsection">
+            <div class="news_firstsection_left">
+                <h1>@lastNewsContent?.Title</h1>
+                <p>
+                    @lastNewsContent?.Description
+                </p>
+            </div>
+            <img src="~/assets/img/news/@lastNewsContent?.Image"
+                 alt=""
+                 class="news_firstsection_right_img" />
+        </div>
+    </div>
+</section>
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="news_secondsection">
+            @foreach (NewsContent newsContent in Model)
+            {
+                if(flag == true)
+                {
+                    flag = false;
+                    continue;
+                }
+                <div class="news_secondsection_card">
+                    <img src="~/assets/img/news/@newsContent.Image"
+                         alt=""
+                         class="news_secondsection_card_img" />
+                    <div class="news_secondsection_card_content">
+                        <h3>
+                            @newsContent.Title
+                        </h3>
+                        <p>
+                            @newsContent.Description
+                        </p>
+                        <span>@newsContent.Date?.ToString("dd.MM.yyyy")</span>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

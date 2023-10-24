@@ -1,0 +1,57 @@
+﻿@model OurCustomersVM
+@inject LanguageService language
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="ourcustomer_navibox">
+            <p>
+                <a asp-controller="Home" asp-action="Index">@language.Getkey("Home")</a>
+            </p>
+            <p>|</p>
+            <p>@language.Getkey("OurCustomers")</p>
+        </div>
+    </div>
+</section>
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="ourcustomer_firstSection">
+            <div class="ourcustomer_firstSection_left">
+                <h1>@language.Getkey("OurCustomerStatistics")</h1>
+                <p>
+                    Ut malesuada nam ac purus id ac ultrices praesent a.  Hac a
+                    elementum duis non turpis quis. Cursus mauris netus  sollicitudin
+                    sed eget neque sociis porta. Magna nisl nec morbi  faucibus leo
+                    ultrices quisque. Nulla habitant turpis faucibus posuere ipsum
+                    hendrerit mattis. Faucibus turpis maecenas cursus elit nam ac.
+                    Pretium nam fringilla eget arcu netus.
+                </p>
+            </div>
+            <div class="ourcustomer_firstSection_right">
+                @foreach (Statistics statistics in Model.Statistics)
+                {
+                    <div class="box">
+                        <div class="number">@statistics.Value</div>
+                        <div class="text">@statistics.Title</div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="ourcustomer_swiper">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    @foreach (Customer customer in Model.Customers)
+                    {
+                        <div class="swiper-slide">
+                            <img src="~/assets/img/customers/@customer.Image"
+                                 alt="" />
+                        </div>
+                    }
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+</section>

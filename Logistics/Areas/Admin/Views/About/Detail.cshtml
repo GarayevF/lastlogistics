@@ -1,0 +1,11 @@
+﻿@model About
+<h1>About Details</h1>
+<p><strong>Title:</strong> @Model.Title</p>
+<p><strong>Description:</strong> @Model.Description</p>
+<div class="d-flex" style="gap:20px">
+    <p><strong>First Image:</strong> <img style="width:120px; height:120px; object-fit:cover;" src="~/assets/img/about/@Model.Image_1" /></p>
+    <p><strong>Second Image:</strong> <img style="width:120px; height:120px; object-fit:cover;" src="~/assets/img/about/@Model.Image_2" /></p>
+    <p><strong>Third Image:</strong> <img style="width:120px; height:120px; object-fit:cover;" src="~/assets/img/about/@Model.Image_3" /></p>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Go to Back</a>

@@ -1,0 +1,149 @@
+﻿@model HomeVM
+@inject LanguageService language
+@{
+    string culture = ViewBag.CurrentCulture;
+}
+
+<section class="mainSec fullWidth">
+    <div class="mainSecContainer">
+        <div class="overlayCard">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div>@User.Identity.Name</div>
+            }
+            else
+            {
+                <h1>
+                    Təcrübə və Təsərrüfatla
+                    Sizin Üçün Çatdırırıq
+                </h1>
+            }
+            <input type="text" placeholder="İzləmə kodu" name="" id="" />
+        </div>
+        <video autoplay
+               loop
+               muted
+               src="~/assets/meida/-7b60-4175-a927-22edd17456a5.mp4"></video>
+    </div>
+</section>
+<section class="aboutSec fullWidth">
+    <div class="mainContainer">
+        <h2>@language.Getkey("AboutUs")</h2>
+        <div class="body">
+            <div class="text">
+                <div class="one">
+                    Lorem ipsum dolor sit amet consectetur.
+                    Duis neque feugiat blandit
+                    lorem. Porttitor
+                    nullam viverra nunc semper lorem.
+
+                </div>
+                <div class="two">
+                    Ut malesuada nam ac purus id ac ultrices
+                    praesent a. Hac a
+                    elementum duis non turpis quis. Cursus mauris netus sollicitudin
+                    sed eget neque sociis porta. Magna nisl nec morbi faucibus leo
+                    ultrices quisque. Nulla habitant turpis faucibus posuere ipsum
+                    hendrerit mattis. Faucibus turpis maecenas cursus elit nam ac.
+                    Pretium nam
+                    fringilla eget arcu netus.
+                </div>
+            </div>
+            <img src="~/assets/img/image 3.svg" alt="" />
+        </div>
+    </div>
+</section>
+<section class="servicesSec fullWidth">
+    <div class="mainContainer">
+        <h2>@language.Getkey("OurServices")</h2>
+        <div class="cards">
+            @foreach (Service service in Model.Services)
+            {
+                <div class="card">
+                    <img src="~/assets/img/services/@service.Icon" alt="" />
+                    <div class="body">
+                        @service.Title
+                    </div>
+                    <div class="bottom">@service.Description</div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<section class="ourCustomer fullWidth">
+    <div class="mainContainer">
+        <div class="customer_header">
+            <h2>@language.Getkey("OurCustomers")</h2>
+            <div>
+                <img src="~/assets/icons/arrow-left.svg"
+                     class="swiper-prev"
+                     alt="" />
+                <img src="~/assets/icons/arrow-right.svg"
+                     class="swiper-next"
+                     alt="" />
+            </div>
+        </div>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                @foreach(Customer customer in Model.Customers)
+                {
+                    <div class="swiper-slide">
+                        <img src="~/assets/img/customers/@customer.Image"
+                             alt="" />
+                    </div>
+                }
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section>
+<section class="applyForm fullWidth">
+    <div class="mainContainer">
+        <div class="text">
+            <h2>@language.Getkey("ApplicationForm")</h2>
+            <div class="body">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt,
+                sed?
+            </div>
+        </div>
+        <div class="form">
+            <form action="">
+                <div class="row">
+                    <select name="rental-option">
+                        <option value="small">Small</option>
+                        <option value="family">Family Sedan</option>
+                        <option value="lux">Luxury</option>
+                    </select>
+                    <input type="text" type="" placeholder="input text" />
+                    <input type="text" placeholder="input text" />
+                </div>
+                <div class="row">
+                    <select name="rental-option">
+                        <option value="small">Small</option>
+                        <option value="family">Family Sedan</option>
+                        <option value="lux">Luxury</option>
+                    </select>
+                    <input type="text" placeholder="input text" />
+                    <div class="miniInputs">
+                        <select name="rental-option">
+                            <option value="small">Small</option>
+                            <option value="family">Family Sedan</option>
+                            <option value="lux">Luxury</option>
+                        </select>
+                        <select name="rental-option">
+                            <option value="small">Small</option>
+                            <option value="family">Family Sedan</option>
+                            <option value="lux">Luxury</option>
+                        </select>
+                    </div>
+                </div>
+                <textarea placeholder="Mətni daxil et"
+                          name=""
+                          id=""
+                          cols="30"
+                          rows="10"></textarea>
+                <button type="submit">İrəli</button>
+            </form>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,42 @@
+﻿@model List<Setting>
+@{
+    List<Language> languages = ViewBag.Languages;
+}
+<div class="row mt-3">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">Update Setting</div>
+
+                <hr>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model[0].Key"></label>
+                        <input asp-for="@Model[0].Key" class="form-control">
+                        <span asp-validation-for="@Model[0].Key" class="text text-danger"></span>
+                    </div>
+                    @if (languages != null && languages.Count() > 0)
+                    {
+                        @for (int i = 0; i < languages.Count(); i++)
+                        {
+                            <span>@languages[i].Name</span>
+                            <div class="form-group">
+                                <label asp-for="@Model[i].Value"></label>
+                                <input asp-for="@Model[i].Value" class="form-control">
+                                <span asp-validation-for="@Model[i].Value" class="text text-danger"></span>
+                            </div>
+                            <input type="hidden" asp-for="@Model[i].LanguageId" value="@languages[i].Id">
+                        }
+                    }
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary px-5">Submit</button>
+                        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

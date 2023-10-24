@@ -1,0 +1,138 @@
+﻿@model HeaderVM
+@inject ILayoutService layoutService
+@inject LanguageService language
+@inject ILayoutService layoutService
+
+@{
+    IEnumerable<Service> services = await layoutService.GetServices();
+    IEnumerable<Setting>? settings = await layoutService.GetSettings();
+    string currentCulture = await layoutService.GetCurrentLangauge();
+}
+
+<header class="fullWidth" style="background-color:@Model.Color?.HeaderBackgroundColor">
+    <div class="mainContainer">
+        <nav class="nav">
+            <button class="nav_burger_menu">
+                <div id="nav_burger_menu">
+                    <img src="~/assets/img/burger_menu_icon.svg" alt="" />
+                </div>
+                <div id="nav_burger_dropdown_menu" class="nav_burger_dropdown_menu">
+                    <div class="nav_burger_dropdown_menuitem">
+                        @language.Getkey("Home")
+                        <div class="nav_burger_dropdown_submenu">
+                            <a asp-controller="About" asp-action="Index">@language.Getkey("AboutUs")</a>
+                            <a asp-controller="OurCustomers" asp-action="Index">@language.Getkey("OurCustomers")</a>
+                            <a asp-controller="Contacts" asp-action="BakuOffice">@language.Getkey("ContactInfos")</a>
+                        </div>
+                    </div>
+                    <div class="nav_burger_dropdown_menuitem">
+                        @language.Getkey("Services")
+                        <div class="nav_burger_dropdown_submenu">
+                            @foreach (Service service in Model.Services)
+                            {
+                                <a asp-controller="Services" asp-action="Index" asp-route-id="@service.Id">@service.Title</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="nav_burger_dropdown_menuitem">
+                        @language.Getkey("UsefulInfos")
+                        <div class="nav_burger_dropdown_submenu">
+                            <a asp-controller="Incoterms" asp-action="Index">@language.Getkey("IncotermsConditions")</a>
+                            <a asp-controller="ContainerTypes" asp-action="Index">@language.Getkey("ContainerTypes")</a>
+                            <a asp-controller="News" asp-action="Index">@language.Getkey("News")</a>
+                        </div>
+                    </div>
+                    <div class="nav_burger_dropdown_menuitem">
+                        @language.Getkey("Contact")
+                        <div class="nav_burger_dropdown_submenu">
+                            <a asp-controller="Contacts" asp-action="BakuOffice">@language.Getkey("BakuOffice")</a>
+                            <a asp-controller="Contacts" asp-action="ChineseOffice">@language.Getkey("ChineseOffice")</a>
+                        </div>
+                    </div>
+                </div>
+            </button>
+            <div class="nav_logo">
+                <a asp-controller="Home" asp-action="Index">
+                    <img src="~/assets/img/@settings.FirstOrDefault(s=>s.Key == "Logo" && s.Language.Culture == currentCulture)?.Value" alt="" />
+                </a>
+            </div>
+            <ul class="nav_menu">
+                <li>
+                    <span>@language.Getkey("Home")</span>
+
+                    <div class="nav_dropdown">
+                        <div class="nav_dropdown_item">
+                            <a asp-controller="About" asp-action="Index">@language.Getkey("AboutUs")</a>
+                        </div>
+                        <div class="nav_dropdown_item">
+                            <a asp-controller="OurCustomers" asp-action="Index">@language.Getkey("OurCustomers")</a>
+                        </div>
+                        <div class="nav_dropdown_item">
+                            <a asp-controller="Contacts" asp-action="BakuOffice">@language.Getkey("ContactInfos")</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <span>@language.Getkey("Services")</span>
+                    <div class="nav_dropdown">
+                        @foreach (Service service in Model.Services)
+                        {
+                            <div class="nav_dropdown_item">
+                                <a asp-controller="Services" asp-action="Index" asp-route-id="@service.Id">@service.Title</a>
+                            </div>
+
+                        }
+                    </div>
+                </li>
+                <li>
+                    <span>@language.Getkey("UsefulInfos")</span>
+                    <div class="nav_dropdown">
+                        <div class="nav_dropdown_item">
+                            <a asp-controller="Incoterms" asp-action="Index">@language.Getkey("IncotermsConditions")</a>
+                        </div>
+                        <div class="nav_dropdown_item">
+                            <a asp-controller="ContainerTypes" asp-action="Index">@language.Getkey("ContainerTypes")</a>
+                        </div>
+                        <div class="nav_dropdown_item">
+                            <a asp-controller="News" asp-action="Index">@language.Getkey("News")</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <span>@language.Getkey("Contact")</span>
+                    <div class="nav_dropdown">
+                        <div class="nav_dropdown_item">
+                            <a asp-controller="Contacts" asp-action="BakuOffice">@language.Getkey("BakuOffice")</a>
+                        </div>
+                        <div class="nav_dropdown_item">
+                            <a asp-controller="Contacts" asp-action="ChineseOffice">@language.Getkey("ChineseOffice")</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="nav_lang_con">
+                <button class="nav_lang"><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="@Model?.CurrentLanguageCulture">@Model?.CurrentLanguageName</a></button>
+                <div class="nav_lang_dropdown">
+                    @foreach (LanguageVM languageVM in Model.LanguageVMs)
+                    {
+                        <p><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="@languageVM.Culture">@languageVM.Name</a></p>
+                    }
+                    
+                    @* <p><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="ru-RU">Ru</a></p> *@
+                </div>
+            </div>
+            <li class="nav-item">
+                @* <form asp-action="ChangeLanguage" asp-controller="Home" method="post">
+                    <input type="hidden" id="returnUrl" name="returnUrl" value="@returnUrl" />
+                    <select id="culture"
+                            name="culture"
+                            class="form-control"
+                            onchange="this.form.submit();"
+                            asp-items="cultureItems"
+                            asp-for="@requestCulture.RequestCulture.UICulture.Name">
+                    </select>
+                </form> *@
+            </li>
+        </nav>
+    </div>
+</header>

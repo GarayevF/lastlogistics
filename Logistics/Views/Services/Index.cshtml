@@ -1,0 +1,62 @@
+﻿@model Service
+
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="shipping_by_air_navibox">
+            <p>
+                <a asp-controller="Home" asp-action="Index">Ana səhifə</a>
+            </p>
+            <p>|</p>
+            <p>
+                <a>Xidmətlərimiz</a>
+            </p>
+            <p>|</p>
+            <p>@Model.Title</p>
+        </div>
+    </div>
+</section>
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="shipping_by_air_firstsection">
+            <div class="shipping_by_air_firstsection_left">
+                <h1>@Model.Title haqqında</h1>
+                <p>
+                    @Model.Content
+                </p>
+            </div>
+            <img src="~/assets/img/services/@Model.Image_1"
+                 alt=""
+                 class="shipping_by_air_firstsection_right_img" />
+        </div>
+    </div>
+</section>
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="shippingair">
+            <div class="shippingair_images">
+                <img src="~/assets/img/services/@Model.Image_2"
+                     class="topImage"
+                     alt="" />
+                <img src="~/assets/img/services/@Model.Image_3"
+                     class="bottomImage"
+                     alt="" />
+            </div>
+
+            <div class="shippingair_right">
+                <h2>Bölmələrimiz</h2>
+                <p>
+                    @Model.SectionDescription
+                </p>
+                <div class="shippingair_right_list">
+                    @foreach (ServiceServiceSection item in Model.ServiceServiceSections)
+                    {
+                        <div class="shippingair_right_list_item">
+                            <img src="~/assets/img/plus-lg.svg" alt="" />
+                            <span>@item.ServiceSection.Title</span>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

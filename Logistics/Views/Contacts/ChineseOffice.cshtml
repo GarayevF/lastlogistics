@@ -1,0 +1,43 @@
+﻿@inject LanguageService language
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="office_navibox">
+            <p><a asp-controller="Home" asp-action="Index">@language.Getkey("Home")</a></p>
+            <p>|</p>
+            <p>@language.Getkey("Contact")</p>
+        </div>
+    </div>
+</section>
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="office_firstsection">
+            <div class="office_firstsection_tabCon">
+                <a asp-controller="Contacts" asp-action="BakuOffice"
+                   class="office_firstsection_tab ">@language.Getkey("BakuOffice")</a>
+                <a asp-controller="Contacts" asp-action="ChineseOffice" class="office_firstsection_tab office_firstsection_tab_active">@language.Getkey("ChineseOffice")</a>
+            </div>
+            <div class="office_firstsection_content">
+                <iframe class="office_firstsection_mapCon"
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12150.355074845917!2d49.863400000000006!3d40.41796!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2saz!4v1696929331657!5m2!1sen!2saz"
+                        width="600"
+                        height="450"
+                        style="border: 0"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                <div class="office_firstsection_texts">
+                    <h1>@language.Getkey("ChineseOffice")</h1>
+                    <p>
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                        Necessitatibus recusandae minus veniam. Officia, accusantium
+                        consequuntur?
+                    </p>
+                    <p>@language.Getkey("Address"):</p>
+                    <p>E-mail:</p>
+                    <p>@language.Getkey("Phone"):</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

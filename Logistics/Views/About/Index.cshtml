@@ -1,0 +1,60 @@
+﻿@model AboutVM
+@inject LanguageService language
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="about_navibox">
+            <p><a asp-controller="Home" asp-action="Index">@language.Getkey("Home")</a></p>
+            <p>|</p>
+            <p>@language.Getkey("AboutUs")</p>
+        </div>
+    </div>
+</section>
+<section class="about_firstSection fullWidth">
+    <div class="about_firstSection_con mainContainer">
+        <div class="about_firstSection_left">
+            <img class="about_firstSection_left_img1"
+                 src="~/assets/img/about/@Model.About?.Image_1"
+                 alt="" />
+            <img class="about_firstSection_left_img2"
+                 src="~/assets/img/about/@Model.About?.Image_2"
+                 alt="" />
+            <img class="about_firstSection_left_img3"
+                 src="~/assets/img/about/@Model.About?.Image_3"
+                 alt="" />
+        </div>
+        <div class="about_firstSection_right">
+            <h2>
+                @Model.About?.Title
+            </h2>
+            <p>
+                @Model.About?.Description
+            </p>
+        </div>
+    </div>
+</section>
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="about_secondSection">
+            <div class="about_secondSection_header">
+                <h2>@language.Getkey("OurPriorities")</h2>
+                <p>
+                    @Model.Priority?.Description
+                </p>
+            </div>
+            <div class="about_secondSection_cardsCon">
+                @foreach (PriorityCard priorityCard in Model.PriorityCards)
+                {
+                    <div class="about_secondSection_card">
+                        <div class="about_secondSection_card_icon">
+                            <img src="~/assets/img/prioritycard/@priorityCard.Image" alt="" />
+                        </div>
+                        <h3>@priorityCard.Title</h3>
+                        <p>
+                            @priorityCard.Description
+                        </p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

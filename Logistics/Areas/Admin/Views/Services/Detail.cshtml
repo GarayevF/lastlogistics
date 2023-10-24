@@ -1,0 +1,22 @@
+﻿@model Service
+<h1>Service Details</h1>
+<p><strong>Icon:</strong> <img style="width:80px; height:80px; object-fit:cover; border-radius:50%;" src="~/assets/img/services/@Model.Icon"/></p>
+<p><strong>Title:</strong> @Model.Title</p>
+<p><strong>Description:</strong> @Model.Description</p>
+<p><strong>Content:</strong> @Model.Content</p>
+<p><strong>Section Description:</strong> @Model.SectionDescription</p>
+<div class="d-flex" style="gap:20px">
+    <p><strong>First Image:</strong> <img style="width:120px; height:120px; object-fit:cover;" src="~/assets/img/services/@Model.Image_1" /></p>
+    <p><strong>Second Image:</strong> <img style="width:120px; height:120px; object-fit:cover;" src="~/assets/img/services/@Model.Image_2" /></p>
+    <p><strong>Third Image:</strong> <img style="width:120px; height:120px; object-fit:cover;" src="~/assets/img/services/@Model.Image_3" /></p>
+</div>
+<strong>Service Sections:</strong>
+<ol>
+    
+        @foreach (ServiceServiceSection serviceServiceSection in Model.ServiceServiceSections)
+        {
+            <li>@serviceServiceSection.ServiceSection.Title</li>
+        }
+</ol>
+
+<a asp-action="Index" class="btn btn-secondary">Go to Back</a>

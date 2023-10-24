@@ -1,0 +1,58 @@
+﻿@model IncotermsVM
+@inject LanguageService language
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="incoterms_navibox">
+            <p>
+                <a asp-controller="Home" asp-action="Index">@language.Getkey("Home")</a>
+            </p>
+            <p>|</p>
+            <p>
+                <a>@language.Getkey("UsefulInfos")</a>
+            </p>
+            <p>|</p>
+            <p>@language.Getkey("IncotermsConditions")</p>
+        </div>
+    </div>
+</section>
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="incoterms_firstsection">
+            <img src="~/assets/img/incoterms/@Model.Incoterms?.AboutImage_1"
+                 alt=""
+                 class="incoterms_firstsection_left_img" />
+            <div class="incoterms_firstsection_right">
+                <div class="incoterms_firstsection_right_texts">
+                    <h1>@language.Getkey("AboutIncoterms")</h1>
+                    <p>
+                        @Model.Incoterms?.AboutDescription
+                    </p>
+                </div>
+                <div class="incoterms_firstsection_right_imgs">
+                    <img src="~/assets/img/incoterms/@Model.Incoterms?.AboutImage_2" alt="">
+                    <img src="~/assets/img/incoterms/@Model.Incoterms?.AboutImage_3" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="incoterms_secondsection">
+            <div class="incoterms_secondsection_left">
+                <h2>@language.Getkey("Conditions")</h2>
+                <p>@Model.Incoterms?.ConditionDescription</p>
+                <div class="incoterms_secondsection_left_list">
+                    @foreach (IncotermsSection incotermsSection in Model.IncotermsSection)
+                    {
+                        <div class="incoterms_secondsection_left_listitem">
+                            <img src="~/assets/img/incoterms/@incotermsSection?.Icon" alt="">
+                            <span>@incotermsSection?.Title</span>
+                        </div>
+                    }
+                </div>
+            </div>
+            <img src="~/assets/img/incoterms/@Model.Incoterms?.ConditionImage" alt="" class="incoterms_secondsection_right_img">
+        </div>
+    </div>
+</section>

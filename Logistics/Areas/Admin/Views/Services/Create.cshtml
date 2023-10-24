@@ -1,0 +1,87 @@
+﻿@model List<Service>
+@{
+    List<ServiceSection> containerTypes = ViewBag.ServicesSection;
+    SelectList selectList = new SelectList(containerTypes, nameof(ServiceSection.Id), nameof(ServiceSection.Title));
+    List<Language> languages = ViewBag.Languages;
+}
+<div class="row mt-3">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">Create Service</div>
+                <hr>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model[0].IconPhoto">Icon Photo</label>
+                        <input accept="image/*" asp-for="@Model[0].IconPhoto" class="form-control">
+                        <span asp-validation-for="@Model[0].IconPhoto" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model[0].Photo_1">First Image</label>
+                        <input accept="image/*" asp-for="@Model[0].Photo_1" class="form-control">
+                        <span asp-validation-for="@Model[0].Photo_1" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model[0].Photo_2">Second Image</label>
+                        <input accept="image/*" asp-for="@Model[0].Photo_2" class="form-control">
+                        <span asp-validation-for="@Model[0].Photo_2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model[0].Photo_3">Third Image</label>
+                        <input accept="image/*" asp-for="@Model[0].Photo_3" class="form-control">
+                        <span asp-validation-for="@Model[0].Photo_3" class="text-danger"></span>
+                    </div>
+                    @if(languages != null && languages.Count() > 0)
+                    {
+                        @for (int i = 0; i < languages.Count(); i++)
+                        {
+                            <span>@languages[i].Name</span>
+                            <div class="form-group">
+                                <label asp-for="@Model[i].Title"></label>
+                                <input asp-for="@Model[i].Title" class="form-control">
+                                <span asp-validation-for="@Model[i].Title" class="text text-danger"></span>
+                            </div>
+                            <span>@languages[i].Name</span>
+                            <div class="form-group">
+                                <label asp-for="@Model[i].Description"></label>
+                                <textarea asp-for="@Model[i].Description" class="form-control" rows="2"></textarea>
+                                <span asp-validation-for="@Model[i].Description" class="text-danger"></span>
+                            </div>
+                            <span>@languages[i].Name</span>
+                            <div class="form-group">
+                                <label asp-for="@Model[i].Content"></label>
+                                <input accept="image/*" asp-for="@Model[i].Content" class="form-control">
+                                <span asp-validation-for="@Model[i].Content" class="text-danger"></span>
+                            </div>
+                            <span>@languages[i].Name</span>
+                            <div class="form-group">
+                                <label asp-for="@Model[i].SectionDescription">Section Description</label>
+                                <textarea asp-for="@Model[i].SectionDescription" class="form-control" rows="4"></textarea>
+                                <span asp-validation-for="@Model[i].SectionDescription" class="text text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="@Model[i].ServiceSectionIds"></label>
+                                <select asp-for="@Model[i].ServiceSectionIds" class="form-control" style="height:150px;" multiple>
+                                    @foreach (ServiceSection serviceSection in containerTypes.Where(s => s.LanguageId == languages[i].Id))
+                                    {
+                                        <option value="@serviceSection.Id">@serviceSection.Title</option>
+                                    }
+                                </select>
+                            </div>
+                            <input type="hidden" asp-for="@Model[i].LanguageId" value="@languages[i].Id">
+                        }
+                    }
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary px-5">Submit</button>
+                        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

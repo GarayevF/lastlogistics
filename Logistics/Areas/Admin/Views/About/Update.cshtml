@@ -1,0 +1,57 @@
+﻿@model List<About>
+@{
+    List<Language> languages = ViewBag.Languages;
+}
+<div class="row mt-3">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">Update About</div>
+                <hr>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label asp-for="@Model[0].Photo_1">First Image</label>
+                        <input accept="image/*" asp-for="@Model[0].Photo_1" class="form-control">
+                        <span asp-validation-for="@Model[0].Photo_1" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model[0].Photo_2">Second Image</label>
+                        <input accept="image/*" asp-for="@Model[0].Photo_2" class="form-control">
+                        <span asp-validation-for="@Model[0].Photo_3" class="text text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model[0].Photo_3">Third Image</label>
+                        <input accept="image/*" asp-for="@Model[0].Photo_3" class="form-control">
+                        <span asp-validation-for="@Model[0].Photo_3" class="text-danger"></span>
+                    </div>
+                    @if (languages != null && languages.Count() > 0)
+                    {
+                        @for (int i = 0; i < languages.Count(); i++)
+                        {
+                            <span>@languages[i].Name</span>
+                            <div class="form-group">
+                                <label asp-for="@Model[i].Title">Title</label>
+                                <input asp-for="@Model[i].Title" class="form-control">
+                                <span asp-validation-for="@Model[i].Title" class="text text-danger"></span>
+                            </div>
+                            <span>@languages[i].Name</span>
+                            <div class="form-group">
+                                <label asp-for="@Model[i].Description">Description</label>
+                                <textarea asp-for="@Model[i].Description" class="form-control" rows="2"></textarea>
+                                <span asp-validation-for="@Model[i].Description" class="text text-danger"></span>
+                            </div>
+                            <input type="hidden" asp-for="@Model[i].LanguageId" value="@languages[i].Id">
+                        }
+                    }
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary px-5">Submit</button>
+                        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

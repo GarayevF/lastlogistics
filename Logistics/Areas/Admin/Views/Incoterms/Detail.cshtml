@@ -1,0 +1,11 @@
+﻿@model Incoterms
+<h1>Incoterms Details</h1>
+<p><strong>About Description:</strong> @Model.AboutDescription</p>
+<div class="d-flex" style="gap:20px">
+    <p><strong>First Image:</strong> <img style="width:120px; height:120px; object-fit:cover;" src="~/assets/img/incoterms/@Model.AboutImage_1" /></p>
+    <p><strong>Second Image:</strong> <img style="width:120px; height:120px; object-fit:cover;" src="~/assets/img/incoterms/@Model.AboutImage_2" /></p>
+    <p><strong>Third Image:</strong> <img style="width:120px; height:120px; object-fit:cover;" src="~/assets/img/incoterms/@Model.AboutImage_3" /></p>
+</div>
+<p><strong>Condition Description:</strong> @Model.ConditionDescription</p>
+<p><strong>Condition Image:</strong> <img style="width:120px; height:120px; object-fit:cover;" src="~/assets/img/incoterms/@Model.ConditionImage" /></p>
+<a asp-action="Index" class="btn btn-secondary">Go to Back</a>

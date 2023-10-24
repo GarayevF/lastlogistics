@@ -1,0 +1,82 @@
+﻿@model List<ContainerType>
+@inject LanguageService language
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="aboutCon_navibox">
+            <p><a asp-controller="Home" asp-action="Index">@language.Getkey("Home")</a></p>
+            <p>|</p>
+            <p><a> @language.Getkey("UsefulInfos")</a></p>
+            <p>|</p>
+            <p>@language.Getkey("ContainerTypes")</p>
+        </div>
+    </div>
+</section>
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="aboutCon_firstsection">
+            <div class="aboutCon_firstsection_left">
+                <h1>@language.Getkey("AboutContainer")</h1>
+                <p>
+                    Ut malesuada nam ac purus id ac ultrices praesent a hac
+                    a
+                    elementum duis non turpis quis. Magna nisl nec morbi faucibus leo
+                    ultrices quisque. Nulla habitant turpis faucibus posuere ipsum
+                    hendrerit mattis. Faucibus turpis maecenas cursus elit nam ac.
+                    Pretium
+                    nam fringilla eget arcu netus.
+                </p>
+            </div>
+            <img src="~/assets/img/konteynerhaqqnda_img1.svg"
+                 alt=""
+                 class="aboutCon_firstsection_right_img" />
+        </div>
+    </div>
+</section>
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="aboutCon_secondSection">
+            <div class="aboutCon_secondSection_cardsCon">
+                @foreach (ContainerType containerType in Model)
+                {
+                    <div class="aboutCon_secondSection_card">
+                        <div class="aboutCon_secondSection_card_icon">
+                            <img src="~/assets/img/containerTypes/@containerType.Icon" alt="" />
+                        </div>
+                        <h3>@containerType.Title</h3>
+                        <p>
+                            @containerType.Description
+                        </p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<section class="fullWidth">
+    <div class="mainContainer">
+        <div class="aboutCon_third">
+            <div class="aboutCon_third_left">
+                <img src="~/assets/img/konteynerhaqqnda_img2.svg" alt="" />
+            </div>
+            <div class="aboutCon_third_right">
+                <h2>@language.Getkey("ContainerProperties")</h2>
+                <div class="aboutCon_third_right_text">
+                    Ut malesuada nam ac purus id ac ultrices praesent a hac a elementum
+                    duis non turpis quis. Magna nisl nec morbi faucibus leo ultrices
+                    quisque. Nulla habitant turpis faucibus posuere ipsum hendrerit
+                    mattis. Faucibus turpis maecenas cursus elit nam ac. Pretium nam
+                    fringilla eget arcu netus. Magna nisl nec morbi faucibus leo
+                    ultrices quisque. Nulla habitant turpis faucibus posuere ipsum
+                    hendrerit mattis. Faucibus turpis maecenas cursus elit nam ac.
+                    Pretium nam fringilla eget arcu netus. Ut malesuada nam ac purus id
+                    ac ultrices
+                    praesent a hac a elementum duis non turpis
+                    quis. Magna
+                    nisl nec morbi faucibus leo ultrices
+                    quisque. Nulla habitant turpis
+                    faucibus posuere ipsum hendrerit mattis.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
